@@ -1,6 +1,5 @@
 
 'use strict';
-// REVIEW: Check out all of our new arrow function syntax!
 
 
 const express = require('express');
@@ -17,5 +16,5 @@ client.on('error', err => {console.error(err);});
 
 app.use(cors());
 app.get('/',(req,res)=>res.send('Testing 1,2,3'));
-app.get('*',(req,res)=res.redirect(CLIENT_URL));
+app.get('*',(req,res)=>res.redirect(CLIENT_URL));
 app.listen(PORT,()=> console.log(`listening on port:${PORT}`));
