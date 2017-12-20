@@ -23,6 +23,11 @@ app.get('/api/v1/books', (req, res) => {
   .then(results => res.send(results.rows))
   .catch(console.error)
 });
+app.get('/api/v1/books:id', (req, res) => {
+  client.query('SELECT * FROM books;')
+  .then(results => res.send(results.rows))
+  .catch(console.error)
+});
 
 app.all('*', (req, res) => res.redirect(CLIENT_URL));
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
