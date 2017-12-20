@@ -11,10 +11,11 @@
   "author": "Code Fellows, LLC",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "nodemon": "^1.13.3",
+    "nodemon": "^1.14.0",
+    "pagejs": "0.0.1-alpha",
     "pg": "^7.4.0"
-
   }
 }
