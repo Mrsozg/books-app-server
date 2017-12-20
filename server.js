@@ -23,7 +23,7 @@ app.get('/api/v1/books', (req, res) => {
   .then(results => res.send(results.rows))
   .catch(console.error)
 });
-app.get('/api/v1/books:id', (req, res) => {
+app.get('/api/v1/books', (req, res) => {
   client.query('SELECT * FROM books;')
   .then(results => res.send(results.rows))
   .catch(console.error)
