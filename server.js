@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const cors = require('cors');
@@ -26,5 +26,3 @@ app.get('/api/v1/books', (req, res) => {
 
 app.all('*', (req, res) => res.redirect(CLIENT_URL));
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-
