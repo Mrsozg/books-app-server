@@ -22,13 +22,13 @@ client.on('error', error => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-//app.use(express.static('./book-app-client'));
-app.use(express.static('/'));
+app.use(express.static('./book-app-client'));
+//app.use(express.static('/'));
 
 // REVIEW: These are routes for requesting HTML resources.
-// app.get('/new', (request, response) => {
-//   response.sendFile('index.html', {root: '/'});
-// });
+// app.get('/books', (request, response) => {
+//    response.sendFile('index.html', {root: '/'});
+//  });
 
 app.get('/api/v1/books', (req, res) => {
   client.query('SELECT book_id, title, author, image_url FROM books;')
