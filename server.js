@@ -31,7 +31,7 @@ client.on('error', error => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static('/'));
+app.use(express.static('/books'));
 
 // REVIEW: These are routes for requesting HTML resources.
 // app.get('/books', (request, response) => {
