@@ -52,6 +52,14 @@ app.delete('/api/v1/books/:id', (req, res) => {
   .catch(console.error);
 });
 
+app.put('/api/v1/books/:id', (req, res) => {
+  client.query(`
+    UPDATE books
+    SET title=$1, author=$2, isbn=$3, image_url=$4, description=$5
+    WHERE book_id=$6`,[req.body.title, req.body.author, req.body.isbn, req.body.image_url, req.body.description, req.params.id])
+  .then(() => res.sendStatus(204))
+  .catch(console.error)
+})
 
 
 app.all('*', (req, res) => res.redirect(CLIENT_URL));
