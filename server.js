@@ -22,13 +22,9 @@ client.on('error', error => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-//app.use(express.static('./book-app-client'));
+
 app.use(express.static('/'));
 
-// REVIEW: These are routes for requesting HTML resources.
-// app.get('/new', (request, response) => {
-//   response.sendFile('index.html', {root: '/'});
-// });
 
 app.get('/api/v1/books', (req, res) => {
   client.query('SELECT book_id, title, author, image_url FROM books;')
@@ -49,6 +45,22 @@ app.post('/api/v1/books', (request, response) => {
   .then(results => response.send(201))
   .catch(console.error)
 });
+
+app.delete('/api/v1/books/:id', (req, res) => {
+  client.query('delete from books where book_id=$1', [req.params.id])
+  .then(() => res.sendStatus(204))
+  .catch(console.error);
+});
+
+app.put('/api/v1/books/:id', (req, res) => {
+  client.query(`
+    UPDATE books
+    SET title=$1, author=$2, isbn=$3, image_url=$4, description=$5
+    WHERE book_id=$6`,[req.body.title, req.body.author, req.body.isbn, req.body.image_url, req.body.description, req.params.id])
+  .then(() => res.sendStatus(204))
+  .catch(console.error)
+})
+
 
 app.all('*', (req, res) => res.redirect(CLIENT_URL));
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
