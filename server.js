@@ -42,16 +42,13 @@ app.get('/api/v1/books/:id', (req, res) => {
   .catch(console.error)
 });
 
-app.post('/api/v1/books', (request,response) => {
+app.post('/api/v1/books', (request, response) => {
   client.query(
     'INSERT INTO books (title, author, isbn, image_url, description) VALUES ($1, $2,$3,$4,$5);',
-    [request.body.title, request.body.author, request.body.isbn, request.body.image_url, request.body.description],
-    function(err) {
-      if (err) console.error(err);}
-  )
-
+    [request.body.title, request.body.author, request.body.isbn, request.body.image_url, request.body.description])
+  .then(results => response.send(201))
+  .catch(console.error)
 });
-
 
 app.all('*', (req, res) => res.redirect(CLIENT_URL));
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
