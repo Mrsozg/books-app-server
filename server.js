@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
 const CLIENT_URL = process.env.CLIENT_URL;
+const TOKEN = process.env.TOKEN;
 
 const client = new pg.Client(DATABASE_URL);
 client.connect();
@@ -61,6 +62,7 @@ app.put('/api/v1/books/:id', (req, res) => {
   .catch(console.error)
 })
 
+app.get('/api/v1/admin', (req, res) => res.send(TOKEN === req.query.token))
 
 app.all('*', (req, res) => res.redirect(CLIENT_URL));
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
